@@ -1,22 +1,22 @@
 # PyPwGen by JARV
 
-## Version 1.0 of my Python Password Generator
+## Version 1.0.1 of my Python Password Generator
 
 Allows you to: <br>
 - Generate a password using Letters, Digits or Special Characters <br>
 - Choose which type of characters you want to see used <br>
 - Set the desired password lenght <br>
 - Will automatically copy the password to your clipboard <br>
-- Will automatically export the password to a notepad called "Passwords.txt" <br>
+- Will automatically export the password to a notepad called "Passwords.txt" that will be created in the same directory as the program <br>
 - Gives you the possibility to (very intuitively and with no programming knowledge) use the notepad created by the Password Generator to record your password:website relations so that you won't ever have to guess where you used that password. <br>
 
 
   ## TROUBLESHOOTING:
 
     Microsoft Windows Defender flagged it as Malware: 
-      - Most python codes are falsely detected by anti-virus softwares (including Microsoft Windows Defender) as malware
-        due to most virus/malware creators using the same libraries to turn the .py into a .exe <br> <br> <br>
-      - I have submitted my files to Microsoft and they verified it as being safe. <br>
+      - Most python codes are falsely detected by anti-virus softwares (including Microsoft Windows Defender)
+        as malware due to most virus/malware creators using the same libraries to turn the .py into a .exe 
+      - I have submitted my files to Microsoft and they verified it as being safe. 
 
             - If Microsoft Windows Defender removes the .exe from your computer you can either add it to the whitelist
               or update your computer's Windows Defender definitions by following these steps: 
@@ -31,3 +31,9 @@ Allows you to: <br>
               https://docs.microsoft.com/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus
 
   If you face any other problems message me on discord: jarvpt
+
+# Patched
+
+ - Fixed problem with the timer not displaying the correct time it took to generate the password.
+
+**Full Changelog**: https://github.com/JARV-dev/PyPwGen/commits/PyPwGen
