@@ -68,13 +68,13 @@ while generate:
 # Take note on where the user will use the password
     where_used = input("Where will you use the password? (Leave in blank if you don't want to register that information in the generated .txt document): ")
 
+# Start counting elapsed time 
+    start_time = time.time()
+    
 # Where the magic happens
     password = ""
     for i in range(password_lenght):
         password += "".join(secrets.choice(selection_list))
-
-# Start counting elapsed time 
-    start_time = time.time()
 
 # Outputs the generated password to a notepad in the same dir as the program
     with open("Password.txt", "a") as ff:
