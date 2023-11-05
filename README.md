@@ -14,9 +14,9 @@ Allows you to: <br>
   ## TROUBLESHOOTING:
 
     Microsoft Windows Defender flagged it as Malware: 
-      - Most python codes are falsely detected by anti-virus softwares (including Microsoft Windows Defender)
-        as malware due to most virus/malware creators using the same libraries to turn the .py into a .exe 
-      - I have submitted my files to Microsoft and they verified it as being safe. 
+      - Most python codes are falsely detected by anti-virus softwares (including Microsoft Windows Defender) as malware
+        due to most virus/malware creators using the same libraries to turn the .py into a .exe <br> <br> <br>
+      - I have submitted my files to Microsoft and they verified it as being safe. <br>
 
             - If Microsoft Windows Defender removes the .exe from your computer you can either add it to the whitelist
               or update your computer's Windows Defender definitions by following these steps: 
