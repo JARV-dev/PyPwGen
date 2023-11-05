@@ -2,13 +2,13 @@
 
 ## Version 1.0 of my Python Password Generator
 
-Allows you to:
--Generate a password using Letters, Digits or Special Characters <br>
--Choose which type of characters you want to see used <br>
--Set the desired password lenght <br>
--Will automatically copy the password to your clipboard <br>
--Will automatically export the password to a notepad called "Passwords.txt" <br>
--Gives you the possibility to (very intuitively and with no programming knowledge) use the notepad created by the Password Generator to record your password:website relations so that you won't ever have to guess where you used that password. <br>
+Allows you to: <br>
+- Generate a password using Letters, Digits or Special Characters <br>
+- Choose which type of characters you want to see used <br>
+- Set the desired password lenght <br>
+- Will automatically copy the password to your clipboard <br>
+- Will automatically export the password to a notepad called "Passwords.txt" <br>
+- Gives you the possibility to (very intuitively and with no programming knowledge) use the notepad created by the Password Generator to record your password:website relations so that you won't ever have to guess where you used that password. <br>
 
 
   ## TROUBLESHOOTING:
