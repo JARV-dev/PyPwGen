@@ -1,100 +1,78 @@
-# Importing the needed libraries
 import secrets
 import string
-import random
+import PySimpleGUI as sg
 import pyperclip
 import time
 import os
 
-# Creates the loop
-generate = True
-while generate:
-# Creating the "universe" of characters to be used by the program
+#def font size
+font_config = {'font': ('Constantia', 20)}
+
+def generate_password(length, use_letters, use_digits, use_special_chars):
     letters = string.ascii_letters
     digits = string.digits
     special_chars = string.punctuation
 
-# Asking the user which categories of characters should be used
-    print("")
-    print("")
-    print(" ------------------------------------------------------------------------------------------- ")
-    print(" ----------------------------- PYTHON BASED PASSWORD GENERATOR ----------------------------- ")
-    print(" ----------------------------------------- BY JARV ----------------------------------------- ")
-    print(" ------------------------------------------------------------------------------------------- ")
-    print("")
-    print("Let's define which types of characters you want the password to have.")
-    print("Keep in mind that the strongest passwords will include all of these character types.")
-    print("Select '1' for YES or '0' for NO !!!")
-    print("")
-    print("")
-    use_letters = int(input("Do you want it to contain Letters?  (1 or 0): "))
-    use_digits = int(input("How about Digits?  (1 or 0): "))
-    use_special_chars = int(input("Perhaps Special Characters?  (1 or 0): "))
+    selection_list = ""
+    if use_letters:
+        selection_list += letters
+    if use_digits:
+        selection_list += digits
+    if use_special_chars:
+        selection_list += special_chars
 
-# Asking the user to define the desired password lenght
-    password_lenght = int()
-    while True:
-        if password_lenght > 0:
-            break
-        else:
-            password_lenght = int(input("Insert password lenght (The bigger the better): "))
-
-# Verifies user's selection_list and runs the program accordingly
-    if use_letters == 1 and use_digits == 1 and use_special_chars == 1:
+    if not selection_list:
+        # If none of the options are selected, use all character types
         selection_list = letters + digits + special_chars
 
-    elif use_letters == 0 and use_digits == 1 and use_special_chars == 1:
-        selection_list = digits + special_chars
+    return "".join(secrets.choice(selection_list) for _ in range(length))
 
-    elif use_letters == 1 and use_digits == 0 and use_special_chars == 1:
-        selection_list = letters + special_chars
+def main():
+    text_element = lambda text: sg.Text(text, **font_config)
+    input_element = lambda size: sg.InputText(size=size, **font_config)
 
-    elif use_letters == 1 and use_digits == 1 and use_special_chars == 0:
-        selection_list = letters + digits
+    layout = [
+        [sg.Text('Select character types:', **font_config)],
+        [sg.Checkbox('Letters', key='-LETTERS-', **font_config)],
+        [sg.Checkbox('Digits', key='-DIGITS-', **font_config)],
+        [sg.Checkbox('Special Characters', key='-SPECIAL-', **font_config)],
+        [sg.Text('Password Length:'), sg.InputText(size=(5, 1), key='-LENGTH-', **font_config)],
+        [sg.Text('Website:'), sg.InputText(size=(5, 1), key='-WEBSITE-', **font_config)],
+        [sg.Button('Generate Password', **font_config), sg.Button('Exit', **font_config)],
+    ]
 
-    elif use_letters == 0 and use_digits == 0 and use_special_chars == 1:
-        selection_list = special_chars
+    window = sg.Window('Password Generator', layout, **font_config)
 
-    elif use_letters == 1 and use_digits == 0 and use_special_chars == 0:
-        selection_list = letters
+    while True:
+        event, values = window.read()
 
-    elif use_letters == 0 and use_digits == 1 and use_special_chars == 0:
-        selection_list = digits
-    
-    else:
-        print("You didn't follow the provided instructions. Every character type will be used anyway.")
-        selection_list = digits + letters + special_chars
+        if event in (sg.WINDOW_CLOSED, 'Exit'):
+            break
+        elif event == 'Generate Password':
+            try:
+                use_letters = values['-LETTERS-']
+                use_digits = values['-DIGITS-']
+                use_special_chars = values['-SPECIAL-']
+                length = int(values['-LENGTH-'])
+                website = values['-WEBSITE-']
 
-# Take note on where the user will use the password
-    where_used = input("Where will you use the password? (Leave in blank if you don't want to register that information in the generated .txt document): ")
+                password = generate_password(length, use_letters, use_digits, use_special_chars)
 
-# Start counting elapsed time 
-    start_time = time.time()
-    
-# Where the magic happens
-    password = ""
-    for i in range(password_lenght):
-        password += "".join(secrets.choice(selection_list))
+                # You can add your code for where_used here if needed
 
-# Outputs the generated password to a notepad in the same dir as the program
-    with open("Password.txt", "a") as ff:
-        print(password, " ---- ", where_used, file=ff)
+                # Outputs the generated password to a notepad in the same dir as the program
+                with open("Password.txt", "a") as ff:
+                    print(password, " --- ", website, file=ff)
 
-# Copy the password to the user's clipboard
-    pyperclip.copy(password)
+                # Copy the password to the user's clipboard
+                pyperclip.copy(password)
 
-# Stop counting the elapsed time
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-# Success message
-    print("Everything ran successfully!")
-    print(f"Time taken: {elapsed_time} seconds")
-    print("")
-    print("The generated password is VERY SAFE!")
-    print("The password has been copied to your cliboard successfully.")
-    print("")
-# Ends the program or restarts the while generate loop
-    restart = int(input("| Send 1 to restart the generator // Send 0 to close the generator |:  "))
-    os.system("cls")
-    if restart == 0:
-        generate = False
+                sg.popup_ok('Password generated successfully!\n\n', f'Password: {password}\nCopied to clipboard.\n\n', 'Developed by JARV-Dev', **font_config)
+
+            except ValueError:
+                sg.popup_error('Please enter a valid number for password length.', **font_config)
+
+    window.close()
+
+if __name__ == "__main__":
+    main()
